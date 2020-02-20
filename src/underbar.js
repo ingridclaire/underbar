@@ -128,9 +128,13 @@
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
   	var result = []
-  	for(var i = 0; i < collection.length; i++) {
-  		result.push(iterator(collection[i]))
-  	}
+  	// result.push(_.each(collection, iterator))
+  	// result.push(_.each(collection, iterator))
+  	_.each(collection, function(item) {
+      result.push(iterator(item))
+      })
+  	// for(var i = 0; i < collection.length; i++) {
+  	// 	(result.push(iterator(collection[i])))
   	return result;
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
@@ -181,9 +185,9 @@
   	//accumulator is the starting value (it's optional); if no accumulator is passed in, 
   	// the first element in array is used 
     if(accumulator !== undefined) {
-  	  for(var i = 0; i < collection.length; i++) {
-  	  		 accumulator = iterator(accumulator, collection[i]);
-  	  }
+  	  _.each(collection, function(item) {
+  	  		 accumulator = iterator(accumulator, item);
+  	  })
     } else {
     	accumulator = collection[0]
     	for(var j = 1; j < collection.length; j++) {
