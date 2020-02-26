@@ -342,17 +342,16 @@
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
 
-    var start = Date.now()
-    var timeNow = null
-    var result;
-  
-  return function() {
-   do {
-    timeNow = Date.now();
-   } while((timeNow - start) < wait);
-      result = func.apply(this, arguments);
-    return result
-  }
+    var args = []
+    for (var i = 2; i < arguments.length; i++) {
+      args.push(arguments[i])
+    }
+
+    return setTimeout(function() {
+       func.apply(this, args);
+    }, wait)
+     
+    //   return setTimeout(function() { func.apply(); }, wait, args)
 };
 
 
